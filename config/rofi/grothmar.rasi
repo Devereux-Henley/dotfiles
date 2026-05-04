@@ -1,0 +1,85 @@
+/*
+ * Grothmar Valley palette
+ */
+
+* {
+    twilight:  #2A2440;
+    dusk:      #3D3658;
+    parchment: #F5DEB3;
+    mist:      #C9B8D8;
+    ember:     #E8743C;
+    bloom:     #C26285;
+    amber:     #E8B547;
+
+    background-color: transparent;
+    text-color:       @parchment;
+}
+
+window {
+    width:            600px;
+    border:           2px solid;
+    border-color:     @ember;
+    border-radius:    10px;
+    background-color: @twilight;
+    padding:          0;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    padding:  12px;
+    spacing:  10px;
+}
+
+inputbar {
+    padding:          8px 12px;
+    background-color: @dusk;
+    border-radius:    6px;
+    children:         [ prompt, entry ];
+    spacing:          8px;
+}
+
+prompt {
+    text-color: @ember;
+}
+
+entry {
+    placeholder:       "search…";
+    placeholder-color: @mist;
+    text-color:        @parchment;
+}
+
+listview {
+    lines:    8;
+    spacing:  2px;
+    scrollbar: false;
+    fixed-height: false;
+}
+
+element {
+    padding:       6px 10px;
+    border-radius: 4px;
+    children:      [ element-icon, element-text ];
+    spacing:       8px;
+}
+
+element selected {
+    background-color: @ember;
+    text-color:       @twilight;
+}
+
+element selected.urgent {
+    background-color: @bloom;
+    text-color:       @twilight;
+}
+
+element-icon {
+    size:             1.2em;
+    background-color: transparent;
+    vertical-align:   0.5;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    vertical-align:   0.5;
+}
