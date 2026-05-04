@@ -41,6 +41,12 @@ Because linking is at depth 1, *the entire `~/.config/<app>` directory becomes a
 
 `.spec` is an empty `noarch` package whose only purpose is its `Requires:` list. Adding/removing a package from the rice means editing the `Requires:` block in `dhenley-rice-meta.spec`, bumping `Version:`, and adding a `%changelog` entry — then rebuild and `rpm-ostree install` the new RPM. Treat this file as the source of truth for which system packages the rice depends on; `install.sh` only handles user-level config.
 
+### Spicetify (Spotify theming)
+
+`spicetify-cli` is installed inside a `spicetify` toolbox container (Fedora 44). Spotify itself is a **user-scope** flatpak (not system) — that's a hard requirement so spicetify can write `xpui.spa` as the user. `~/.config/spicetify` is symlinked into `config/spicetify/` here; `Themes/Grothmar/color.ini` re-expresses the Grothmar palette as Spicetify color slots and is what `current_theme = Grothmar` / `color_scheme = base` in `config-xpui.ini` selects.
+
+After every Spotify auto-update the patch is wiped — re-run `toolbox run --container spicetify spicetify apply` to restore it. If `palette.conf` colors change, also update `config/spicetify/Themes/Grothmar/color.ini` and re-apply.
+
 ### Theme cohesion
 
 The "Grothmar Valley" palette is defined once in `config/hypr/palette.conf` (Hyprland variables: `$twilight`, `$ember`, `$parchment`, etc.) and re-expressed as raw hex in app configs that can't `source` it (`config/mako/config`, `config/rofi/grothmar.rasi`, kitty themes under `config/kitty/kitty-themes/themes/Grothmar.conf`, `config/quickshell/Theme.qml`). When changing palette colors, update `palette.conf` *and* every app config that hardcodes the same hex — they are not auto-synchronized. Within quickshell itself, all components import the singleton `Theme` from `qmldir`, so the palette lives in one place per-app.

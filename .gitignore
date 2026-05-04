@@ -2,3 +2,6 @@
 dist/
 *.rpm
 *.bak
+install.log
+config/spicetify/Backup/
+config/spicetify/Extracted/
