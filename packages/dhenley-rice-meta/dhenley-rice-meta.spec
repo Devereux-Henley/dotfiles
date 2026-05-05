@@ -1,5 +1,5 @@
 Name:           dhenley-rice-meta
-Version:        0.4.0
+Version:        0.5.0
 Release:        1%{?dist}
 Summary:        Meta-package aggregating dhenley's Hyprland rice layered packages
 License:        MIT
@@ -18,6 +18,7 @@ Requires:       quickshell
 
 Requires:       mako
 Requires:       rofi-wayland
+Requires:       playerctl
 
 # Requires copr mo-k12/personal
 Requires:       xdg-desktop-portal-termfilechooser
@@ -33,6 +34,9 @@ in one transaction.
 %files
 
 %changelog
+* Tue May 05 2026 Devereux Henley <devereux.henley@gmail.com> - 0.5.0-1
+- Add playerctl for the Quickshell Spotify widget (MPRIS control).
+
 * Mon May 04 2026 Devereux Henley <devereux.henley@gmail.com> - 0.4.0-1
 - Add hyprshutdown (graceful logout/shutdown) and hyprqt6engine
   (Qt6 theme provider) from copr lionheartp/Hyprland.

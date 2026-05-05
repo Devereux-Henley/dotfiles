@@ -15,7 +15,7 @@ QtObject {
     readonly property color sky:       "#6B8FB8"
     readonly property color flame:     "#D04738"
 
-    readonly property real wrapOpacity: 0.9
+    readonly property real wrapOpacity: 0.7
     readonly property color wrapColor: Qt.rgba(twilight.r, twilight.g, twilight.b, wrapOpacity)
 
     readonly property int barWidth:        44

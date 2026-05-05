@@ -11,8 +11,10 @@ Item {
 
     readonly property bool hovered: hover.hovered
 
-    implicitWidth: 44 + Theme.casingPadding * 2
-    implicitHeight: 220 + Theme.casingPadding * 2
+    readonly property int innerPadding: 6
+
+    implicitWidth: 16 + innerPadding * 2
+    implicitHeight: 168 + innerPadding * 2
 
     HoverHandler {
         id: hover
@@ -21,8 +23,8 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: Theme.wrapColor
-        topLeftRadius: Theme.casingPadding * 2
-        bottomLeftRadius: Theme.casingPadding * 2
+        topLeftRadius: Theme.rounding
+        bottomLeftRadius: Theme.rounding
         topRightRadius: 0
         bottomRightRadius: 0
     }
@@ -30,7 +32,7 @@ Item {
     T.Slider {
         id: slider
         anchors.fill: parent
-        anchors.margins: Theme.casingPadding
+        anchors.margins: root.innerPadding
         orientation: Qt.Vertical
         from: 0
         to: 1

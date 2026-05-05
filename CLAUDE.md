@@ -58,14 +58,15 @@ After every Spotify auto-update the patch is wiped — re-run `toolbox run --con
 
 The "Grothmar Valley" palette is defined once in `config/hypr/palette.conf` (Hyprland variables: `$twilight`, `$ember`, `$parchment`, etc.) and re-expressed as raw hex in app configs that can't `source` it (`config/mako/config`, `config/rofi/grothmar.rasi`, kitty themes under `config/kitty/kitty-themes/themes/Grothmar.conf`, `config/quickshell/Theme.qml`). When changing palette colors, update `palette.conf` *and* every app config that hardcodes the same hex — they are not auto-synchronized. Within quickshell itself, all components import the singleton `Theme` from `qmldir`, so the palette lives in one place per-app.
 
-### Quickshell viewport layout
+### Quickshell layout
 
-`config/quickshell/` follows the Caelestia-style "viewport" pattern, not a plain anchored panel:
+`config/quickshell/` is composed of three independent layer-shell panels — there is no perimeter wrap. `shell.qml` filters `Quickshell.screens` to the primary screen and instantiates one `Scope` containing:
 
-- `shell.qml` instantiates a `Variants { model: Quickshell.screens }` so each monitor gets its own `Scope` containing one `ContentWindow` and four `EdgeExclusion` sidecars (one per edge).
-- `ContentWindow.qml` is a full-screen `PanelWindow` with `exclusionMode: ExclusionMode.Ignore` and a multi-rect `mask: Region { ... }` covering only the four perimeter strips — clicks in the inner cutout pass through to apps below. The window paints the four `Theme.twilight` strips that form the wrap, places `RoundCorner` overlays at each inner corner of the cutout to fillet them, and hosts `Bar.qml` (a `ColumnLayout` of widgets with a `Layout.fillHeight` spacer dividing top-aligned launchers from bottom-aligned clock/power) inset into the left strip.
-- `EdgeExclusion.qml` is an invisible 1×1 sidecar `PanelWindow` parameterized by `edge` (`"top"`/`"right"`/`"bottom"`/`"left"`) whose only job is to set `exclusiveZone: Theme.barWidth` so the compositor reserves space for that side of the wrap. ContentWindow itself reserves nothing.
-- `RoundCorner.qml` is a Canvas-based component that paints an L-shape with a quarter-circle cutout in one of four orientations; positioned at each inner corner of the cutout, it rounds the cutout corner with the wrap's `Theme.twilight` color.
-- Components (`AppLauncher`, `PowerButton`, `Clock`) are registered in `qmldir` and styled via the `Theme` singleton.
+- `LeftBar.qml` — full-height left-edge `PanelWindow` reserving `Theme.barWidth + Theme.spacing` via `exclusiveZone`. It paints only a centered rounded "island" (`Theme.wrapColor`, `Theme.rounding`) covering the middle 80% of the screen height, with a small inset from the screen edge. Hosts `Bar.qml` (a `ColumnLayout` of widgets with a `Layout.fillHeight` spacer dividing top-aligned launchers from bottom-aligned clock/power).
+- `SpotifyPanel.qml` — full-width top-edge `PanelWindow` with `exclusionMode: ExclusionMode.Ignore` and a multi-rect `mask` containing a thin invisible trigger strip at `y=0` plus the widget bounds when open. Hovering the strip (or the widget itself, or dragging its slider) slides `SpotifyWidget` down from `y=-implicitHeight` to `y=0`. Trigger strip mask collapses to width 0 when no track is playing.
+- `VolumePanel.qml` — right-edge `PanelWindow` (top+right+bottom anchored, `width = popout.implicitWidth + triggerWidth`) with the same trigger-strip-plus-popout-bounds mask pattern. Hovering the right-edge strip (or the popout itself) slides `VolumePopout` in from `x=root.width` to `x=0`.
+- `SpotifyWidget` and `VolumePopout` are pure visual/interaction components — they don't position themselves; their parent panel animates their `y`/`x` via `Behavior` based on a hover-derived `open` property.
 
-When adding a new popout, paint it inside `ContentWindow` (so it shares the masked surface) and extend the `mask` Region to cover its bounds. Don't put `exclusiveZone` on `ContentWindow`, or the masked-passthrough invariant breaks — add or adjust an `EdgeExclusion` sidecar instead.
+All three panels live on the layer-shell Top layer (Quickshell default). Tiled clients respect `LeftBar`'s `exclusiveZone`, so they can't cover the bar; the Spotify and Volume panels use `Ignore` mode and only capture input where their masks live, so the rest of the screen passes through to apps below.
+
+When adding a new edge widget, mirror the `SpotifyPanel`/`VolumePanel` pattern: a `PanelWindow` with `Ignore` exclusion, a mask containing a thin always-on trigger strip plus a conditional bounds region for the widget, and `Behavior on x/y` on the widget bound to `panel.open`. Components are registered in `qmldir` and styled via the `Theme` singleton.

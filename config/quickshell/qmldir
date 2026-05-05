@@ -1,9 +1,10 @@
 singleton Theme 1.0 Theme.qml
-ContentWindow 1.0 ContentWindow.qml
-EdgeExclusion 1.0 EdgeExclusion.qml
-RoundCorner 1.0 RoundCorner.qml
+LeftBar 1.0 LeftBar.qml
 Bar 1.0 Bar.qml
 AppLauncher 1.0 AppLauncher.qml
 PowerButton 1.0 PowerButton.qml
 Clock 1.0 Clock.qml
+SpotifyPanel 1.0 SpotifyPanel.qml
+SpotifyWidget 1.0 SpotifyWidget.qml
+VolumePanel 1.0 VolumePanel.qml
 VolumePopout 1.0 VolumePopout.qml

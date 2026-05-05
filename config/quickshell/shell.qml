@@ -3,16 +3,14 @@ import Quickshell
 import "."
 
 Variants {
-    model: Quickshell.screens
+    model: Quickshell.screens.length > 0 ? [Quickshell.screens[0]] : []
 
     Scope {
         id: scope
         required property var modelData
 
-        ContentWindow { screen: scope.modelData }
-        EdgeExclusion { screen: scope.modelData; edge: "top"; thickness: Theme.wrapThicknessTopBottom }
-        EdgeExclusion { screen: scope.modelData; edge: "right" }
-        EdgeExclusion { screen: scope.modelData; edge: "bottom"; thickness: Theme.wrapThicknessTopBottom }
-        EdgeExclusion { screen: scope.modelData; edge: "left"; thickness: Theme.barWidth }
+        LeftBar { screen: scope.modelData }
+        SpotifyPanel { screen: scope.modelData }
+        VolumePanel { screen: scope.modelData }
     }
 }
