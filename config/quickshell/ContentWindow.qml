@@ -100,7 +100,7 @@ PanelWindow {
         anchors.top: parent.top
         anchors.topMargin: Theme.wrapThicknessTopBottom + Theme.barPadding
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: Theme.wrapThicknessTopBottom + Theme.barPadding
+        anchors.bottomMargin: Theme.wrapThicknessTopBottom - Theme.barPadding / 2
     }
 
     VolumePopout {

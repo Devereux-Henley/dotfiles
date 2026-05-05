@@ -7,8 +7,10 @@ Rectangle {
 
     width: Theme.iconHitbox
     height: Theme.iconHitbox
-    radius: Theme.rounding
-    color: mouse.containsMouse ? Theme.flame : "transparent"
+    radius: width / 2
+    color: mouse.containsMouse ? Theme.flame : Theme.dusk
+    border.color: Theme.mist
+    border.width: Theme.borderThickness
 
     Behavior on color {
         ColorAnimation { duration: 120 }
@@ -16,6 +18,8 @@ Rectangle {
 
     Text {
         anchors.centerIn: parent
+        anchors.horizontalCenterOffset: -1
+        anchors.verticalCenterOffset: -1
         text: "⏻"
         color: mouse.containsMouse ? Theme.parchment : Theme.flame
         font.pixelSize: 20

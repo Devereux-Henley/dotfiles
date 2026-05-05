@@ -1,5 +1,5 @@
 Name:           dhenley-rice-meta
-Version:        0.3.0
+Version:        0.4.0
 Release:        1%{?dist}
 Summary:        Meta-package aggregating dhenley's Hyprland rice layered packages
 License:        MIT
@@ -9,6 +9,8 @@ BuildArch:      noarch
 Requires:       hyprland
 Requires:       hyprland-guiutils
 Requires:       hyprpaper
+Requires:       hyprshutdown
+Requires:       hyprqt6engine
 Requires:       xdg-desktop-portal-hyprland
 # Also from copr lionheartp/Hyprland (newer than Fedora main):
 Requires:       kitty
@@ -31,6 +33,10 @@ in one transaction.
 %files
 
 %changelog
+* Mon May 04 2026 Devereux Henley <devereux.henley@gmail.com> - 0.4.0-1
+- Add hyprshutdown (graceful logout/shutdown) and hyprqt6engine
+  (Qt6 theme provider) from copr lionheartp/Hyprland.
+
 * Mon May 04 2026 Devereux Henley <devereux.henley@gmail.com> - 0.3.0-1
 - Add yazi (copr: lihaohong/yazi) and xdg-desktop-portal-termfilechooser
   (copr: mo-k12/personal). Both COPRs must be enabled before layering.
