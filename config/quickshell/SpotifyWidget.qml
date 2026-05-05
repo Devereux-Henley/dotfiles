@@ -177,6 +177,17 @@ Item {
         }
     }
 
+    MouseArea {
+        id: foldoutClick
+        anchors.top: controlsRow.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        enabled: root.expanded
+        cursorShape: root.expanded ? Qt.PointingHandCursor : Qt.ArrowCursor
+        onClicked: focusSpotify.running = true
+    }
+
     Rectangle {
         id: artFrame
         anchors.top: controlsRow.bottom
@@ -239,6 +250,11 @@ Item {
             command = ["playerctl", "--player=spotify"].concat(extra);
             running = true;
         }
+    }
+
+    Process {
+        id: focusSpotify
+        command: ["hyprctl", "dispatch", "focuswindow", "class:^(spotify)$"]
     }
 
     Process {
