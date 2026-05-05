@@ -36,10 +36,17 @@ Because linking is at depth 1, *the entire `~/.config/<app>` directory becomes a
 - A `~/.config/<app>` directory → put the directory at `config/<app>/`. The whole directory becomes one symlink.
 - A `~/.<file>` → put it at `home/.<file>`.
 - No edits to `install.sh` are required; it discovers entries dynamically.
+- Anything that doesn't fit those two patterns (e.g. files that need to land inside a wildcarded profile path) lives under `apps/<app>/`, with an explicit special-case in `install.sh`. Zen browser is the current example: `apps/zen/userChrome.css` is symlinked into `~/.var/app/app.zen_browser.zen/.zen/<profile>/chrome/userChrome.css` for every profile (Zen also requires `toolkit.legacyUserProfileCustomizations.stylesheets=true` in `about:config`).
 
 ### `dhenley-rice-meta` package
 
 `.spec` is an empty `noarch` package whose only purpose is its `Requires:` list. Adding/removing a package from the rice means editing the `Requires:` block in `dhenley-rice-meta.spec`, bumping `Version:`, and adding a `%changelog` entry — then rebuild and `rpm-ostree install` the new RPM. Treat this file as the source of truth for which system packages the rice depends on; `install.sh` only handles user-level config.
+
+Some `Requires:` come from third-party Copr repos rather than Fedora's official repos. The spec marks these with a `# Requires copr <owner>/<project>` comment immediately above the dependency. Before `rpm-ostree install dhenley-rice-meta-*.rpm` will resolve, the matching `.repo` files must be present under `/etc/yum.repos.d/` — fetch each one from `https://copr.fedorainfracloud.org/coprs/<owner>/<project>/repo/fedora-44/<owner>-<project>-fedora-44.repo`. Currently required Coprs:
+
+- `lionheartp/Hyprland` — strict source for `hyprland`, `hyprland-guiutils`, `hyprpaper`, `xdg-desktop-portal-hyprland` (not in Fedora main); also provides newer `kitty` and `quickshell` than Fedora's, which the rice prefers (Copr ranks above `fedora` repo by default).
+- `mo-k12/personal` — for `xdg-desktop-portal-termfilechooser`.
+- `lihaohong/yazi` — for `yazi`.
 
 ### Spicetify (Spotify theming)
 

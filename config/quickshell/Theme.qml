@@ -15,13 +15,17 @@ QtObject {
     readonly property color sky:       "#6B8FB8"
     readonly property color flame:     "#D04738"
 
-    readonly property int barWidth:        48
-    readonly property int wrapThickness:   12
+    readonly property real wrapOpacity: 0.9
+    readonly property color wrapColor: Qt.rgba(twilight.r, twilight.g, twilight.b, wrapOpacity)
+
+    readonly property int barWidth:        44
+    readonly property int wrapThickness:           12
+    readonly property int wrapThicknessTopBottom:  18
     readonly property int barPadding:      8
     readonly property int casingPadding:   14
     readonly property int iconSize:        28
     readonly property int iconHitbox:      36
     readonly property int borderThickness: 2
     readonly property int spacing:         10
-    readonly property int rounding:        6
+    readonly property int rounding:        12
 }

@@ -29,7 +29,7 @@ Rectangle {
         Text {
             anchors.horizontalCenter: parent.horizontalCenter
             horizontalAlignment: Text.AlignHCenter
-            text: Qt.formatDateTime(tick.now, "d\nM")
+            text: Qt.formatDateTime(tick.now, "M\nd")
             color: root.accent
             font.pixelSize: 11
         }

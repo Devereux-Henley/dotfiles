@@ -20,7 +20,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        color: Theme.twilight
+        color: Theme.wrapColor
         topLeftRadius: Theme.casingPadding * 2
         bottomLeftRadius: Theme.casingPadding * 2
         topRightRadius: 0

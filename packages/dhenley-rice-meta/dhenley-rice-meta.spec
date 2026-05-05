@@ -1,18 +1,26 @@
 Name:           dhenley-rice-meta
-Version:        0.2.0
+Version:        0.3.0
 Release:        1%{?dist}
 Summary:        Meta-package aggregating dhenley's Hyprland rice layered packages
 License:        MIT
 BuildArch:      noarch
 
+# Requires copr lionheartp/Hyprland
 Requires:       hyprland
 Requires:       hyprland-guiutils
 Requires:       hyprpaper
-Requires:       kitty
-Requires:       mako
-Requires:       quickshell
-Requires:       rofi-wayland
 Requires:       xdg-desktop-portal-hyprland
+# Also from copr lionheartp/Hyprland (newer than Fedora main):
+Requires:       kitty
+Requires:       quickshell
+
+Requires:       mako
+Requires:       rofi-wayland
+
+# Requires copr mo-k12/personal
+Requires:       xdg-desktop-portal-termfilechooser
+# Requires copr lihaohong/yazi
+Requires:       yazi
 
 %description
 Empty meta-package whose dependencies are the set of packages dhenley
@@ -23,6 +31,10 @@ in one transaction.
 %files
 
 %changelog
+* Mon May 04 2026 Devereux Henley <devereux.henley@gmail.com> - 0.3.0-1
+- Add yazi (copr: lihaohong/yazi) and xdg-desktop-portal-termfilechooser
+  (copr: mo-k12/personal). Both COPRs must be enabled before layering.
+
 * Sun May 03 2026 Devereux Henley <devereux.henley@gmail.com> - 0.2.0-1
 - Add hyprpaper for wallpaper management
 
