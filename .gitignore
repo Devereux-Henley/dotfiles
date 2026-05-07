@@ -5,3 +5,4 @@ dist/
 install.log
 config/spicetify/Backup/
 config/spicetify/Extracted/
+config/quickshell/dev-shortcuts.json

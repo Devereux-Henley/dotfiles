@@ -36,7 +36,9 @@ Because linking is at depth 1, *the entire `~/.config/<app>` directory becomes a
 - A `~/.config/<app>` directory → put the directory at `config/<app>/`. The whole directory becomes one symlink.
 - A `~/.<file>` → put it at `home/.<file>`.
 - No edits to `install.sh` are required; it discovers entries dynamically.
-- Anything that doesn't fit those two patterns (e.g. files that need to land inside a wildcarded profile path) lives under `apps/<app>/`, with an explicit special-case in `install.sh`. Zen browser is the current example: `apps/zen/userChrome.css` is symlinked into `~/.var/app/app.zen_browser.zen/.zen/<profile>/chrome/userChrome.css` for every profile (Zen also requires `toolkit.legacyUserProfileCustomizations.stylesheets=true` in `about:config`).
+- Anything that doesn't fit those two patterns (e.g. files that need to land inside a wildcarded profile path) lives under `apps/<app>/`, with an explicit special-case in `install.sh`. Current examples:
+  - `apps/zen/userChrome.css` is symlinked into `~/.var/app/app.zen_browser.zen/.zen/<profile>/chrome/userChrome.css` for every profile (Zen also requires `toolkit.legacyUserProfileCustomizations.stylesheets=true` in `about:config`).
+  - `apps/material-symbols/*.ttf` is symlinked into `~/.local/share/fonts/`, then `fc-cache -f` runs to register the variable font (used by `config/quickshell/MaterialIcon.qml`).
 
 ### `dhenley-rice-meta` package
 

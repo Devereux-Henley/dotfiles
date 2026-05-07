@@ -10,6 +10,7 @@ default-timeout=5000
 max-visible=5
 anchor=top-right
 layer=overlay
+output=DP-1
 
 [urgency=low]
 border-color=#6B8FB8

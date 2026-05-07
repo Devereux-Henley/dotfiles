@@ -1,5 +1,5 @@
 Name:           dhenley-rice-meta
-Version:        0.5.0
+Version:        0.6.0
 Release:        1%{?dist}
 Summary:        Meta-package aggregating dhenley's Hyprland rice layered packages
 License:        MIT
@@ -19,6 +19,7 @@ Requires:       quickshell
 Requires:       mako
 Requires:       rofi-wayland
 Requires:       playerctl
+Requires:       jq
 
 # Requires copr mo-k12/personal
 Requires:       xdg-desktop-portal-termfilechooser
@@ -34,6 +35,11 @@ in one transaction.
 %files
 
 %changelog
+* Thu May 07 2026 Devereux Henley <devereux.henley@gmail.com> - 0.6.0-1
+- Add jq for the Quickshell DevShortcut workspace picker (parses
+  hyprctl workspaces -j to choose the next least-busy workspace in
+  the project band).
+
 * Tue May 05 2026 Devereux Henley <devereux.henley@gmail.com> - 0.5.0-1
 - Add playerctl for the Quickshell Spotify widget (MPRIS control).
 

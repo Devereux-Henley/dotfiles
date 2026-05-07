@@ -42,6 +42,21 @@ link_tree() {
 link_tree "$REPO_DIR/config" "${XDG_CONFIG_HOME:-$HOME/.config}"
 link_tree "$REPO_DIR/home"   "$HOME"
 
+# Material Symbols Rounded variable font (Quickshell UI icons).
+fonts_dir="$HOME/.local/share/fonts"
+mkdir -p "$fonts_dir"
+shopt -s nullglob
+material_fonts=("$REPO_DIR/apps/material-symbols/"*.ttf)
+shopt -u nullglob
+if (( ${#material_fonts[@]} > 0 )); then
+    for ttf in "${material_fonts[@]}"; do
+        link_one "$(readlink -f "$ttf")" "$fonts_dir/$(basename "$ttf")"
+    done
+    if command -v fc-cache >/dev/null 2>&1; then
+        fc-cache -f "$fonts_dir" >/dev/null
+    fi
+fi
+
 # Zen browser (user flatpak): profile dir name is non-deterministic, so glob it.
 # Requires toolkit.legacyUserProfileCustomizations.stylesheets=true in about:config.
 zen_chrome_src="$REPO_DIR/apps/zen/userChrome.css"

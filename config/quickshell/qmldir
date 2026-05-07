@@ -2,6 +2,10 @@ singleton Theme 1.0 Theme.qml
 LeftBar 1.0 LeftBar.qml
 Bar 1.0 Bar.qml
 AppLauncher 1.0 AppLauncher.qml
+MaterialIcon 1.0 MaterialIcon.qml
+DevShortcutsBar 1.0 DevShortcutsBar.qml
+DevShortcut 1.0 DevShortcut.qml
+WorkspaceSwitcher 1.0 WorkspaceSwitcher.qml
 PowerButton 1.0 PowerButton.qml
 Clock 1.0 Clock.qml
 SpotifyPanel 1.0 SpotifyPanel.qml

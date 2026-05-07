@@ -1,0 +1,18 @@
+{
+    "icons": {
+        "editor": "emacs",
+        "shell": "kitty",
+        "browser": "zen",
+        "all": "preferences-desktop"
+    },
+    "shortcuts": [
+        {
+            "label": "P",
+            "icon": "/path/to/myproject-icon.png",
+            "editor": "emacs ~/projects/myproject",
+            "shell": "kitty -d ~/projects/myproject",
+            "browser": "zen -P MyProj --new-instance --new-window http://localhost:3000",
+            "all": ""
+        }
+    ]
+}
