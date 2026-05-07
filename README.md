@@ -29,8 +29,4 @@ See `CLAUDE.md` for architectural notes (palette plumbing, Quickshell panel layo
 
 ## Inspiration
 
-The Quickshell icon strategy — Material Symbols Rounded as a variable font with
-per-instance `FILL`/`GRAD`/`opsz`/`wght` axes, rendered as text glyphs rather
-than SVG — is borrowed from
-[caelestia-dots/shell](https://github.com/caelestia-dots/shell). The
-`MaterialIcon.qml` component mirrors theirs.
+- [caelestia-dots/shell](https://github.com/caelestia-dots/shell)
