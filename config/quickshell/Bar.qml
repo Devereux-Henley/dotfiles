@@ -15,6 +15,10 @@ ColumnLayout {
 
     Item { Layout.fillHeight: true }
 
+    GameModeButton {
+        Layout.alignment: Qt.AlignHCenter
+    }
+
     Clock {
         Layout.alignment: Qt.AlignHCenter
     }

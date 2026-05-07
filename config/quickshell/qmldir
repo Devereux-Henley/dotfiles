@@ -6,6 +6,7 @@ MaterialIcon 1.0 MaterialIcon.qml
 DevShortcutsBar 1.0 DevShortcutsBar.qml
 DevShortcut 1.0 DevShortcut.qml
 WorkspaceSwitcher 1.0 WorkspaceSwitcher.qml
+GameModeButton 1.0 GameModeButton.qml
 PowerButton 1.0 PowerButton.qml
 Clock 1.0 Clock.qml
 SpotifyPanel 1.0 SpotifyPanel.qml
