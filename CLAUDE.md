@@ -39,7 +39,7 @@ Because linking is at depth 1, *the entire `~/.config/<app>` directory becomes a
 - Anything that doesn't fit those two patterns (e.g. files that need to land inside a wildcarded profile path) lives under `apps/<app>/`, with an explicit special-case in `install.sh`. Current examples:
   - `apps/zen/userChrome.css` is symlinked into `~/.var/app/app.zen_browser.zen/.zen/<profile>/chrome/userChrome.css` for every profile (Zen also requires `toolkit.legacyUserProfileCustomizations.stylesheets=true` in `about:config`).
   - `apps/material-symbols/*.ttf` is symlinked into `~/.local/share/fonts/`, then `fc-cache -f` runs to register the variable font (used by `config/quickshell/MaterialIcon.qml`).
-  - `apps/material-symbols/icons/` is **not** in git (`.gitignore`'d). Names listed in `apps/material-symbols/icons.list` are fetched from `google/material-design-icons` on every `install.sh` run (idempotent — existing files are left alone) and recolored with the parchment fill (`#F5DEB3`). Add a glyph to use in rofi rows by appending its symbol name to `icons.list` and re-running `./install.sh`.
+  - Material Symbols SVGs land in `~/.local/share/dhenley-rice-icons/` (not in the repo). Names listed in `apps/material-symbols/icons.list` are fetched from `google/material-design-icons` on every `install.sh` run (idempotent — existing files are left alone) and recolored with the parchment fill (`#F5DEB3`). Add a glyph to use in rofi rows by appending its symbol name to `icons.list` and re-running `./install.sh`. Components reference the dir via `Quickshell.env("HOME") + "/.local/share/dhenley-rice-icons"` so no user-specific paths leak into the QML.
 
 ### `dhenley-rice-meta` package
 

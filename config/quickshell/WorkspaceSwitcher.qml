@@ -1,4 +1,5 @@
 import QtQuick
+import Quickshell
 import Quickshell.Io
 import Quickshell.Hyprland
 import "."
@@ -16,7 +17,7 @@ Item {
         onLaunch: root.openMenu()
     }
 
-    readonly property string iconBase: "/var/home/dhenley/Repos/dotfiles/apps/material-symbols/icons"
+    readonly property string iconBase: Quickshell.env("HOME") + "/.local/share/dhenley-rice-icons"
 
     function openMenu() {
         if (menu.running) return;

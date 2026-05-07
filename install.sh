@@ -61,7 +61,7 @@ fi
 # Names listed in apps/material-symbols/icons.list; each is fetched from
 # google/material-design-icons on first install and recolored with the
 # parchment fill so rofi renders them legibly against twilight.
-icons_dir="$REPO_DIR/apps/material-symbols/icons"
+icons_dir="$HOME/.local/share/dhenley-rice-icons"
 icons_list="$REPO_DIR/apps/material-symbols/icons.list"
 icons_fill="#F5DEB3"
 if [[ -f "$icons_list" ]]; then
