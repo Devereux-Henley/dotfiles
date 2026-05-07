@@ -57,6 +57,8 @@ Some `Requires:` come from third-party Copr repos rather than Fedora's official 
 
 After every Spotify auto-update the patch is wiped — re-run `toolbox run --container spicetify spicetify apply` to restore it. If `palette.conf` colors change, also update `config/spicetify/Themes/Grothmar/color.ini` and re-apply.
 
+`config-xpui.ini` is **not** in git (`spicetify` regenerates it and bakes in the user-specific `prefs_path` to the Spotify flatpak's data dir). After a fresh install, run `toolbox run --container spicetify spicetify config current_theme Grothmar color_scheme base` (or equivalent) to reselect the Grothmar theme; spicetify writes the rest.
+
 ### Theme cohesion
 
 The "Grothmar Valley" palette is defined once in `config/hypr/palette.conf` (Hyprland variables: `$twilight`, `$ember`, `$parchment`, etc.) and re-expressed as raw hex in app configs that can't `source` it (`config/mako/config`, `config/rofi/grothmar.rasi`, kitty themes under `config/kitty/kitty-themes/themes/Grothmar.conf`, `config/quickshell/Theme.qml`). When changing palette colors, update `palette.conf` *and* every app config that hardcodes the same hex — they are not auto-synchronized. Within quickshell itself, all components import the singleton `Theme` from `qmldir`, so the palette lives in one place per-app.

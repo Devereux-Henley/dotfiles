@@ -5,4 +5,5 @@ dist/
 install.log
 config/spicetify/Backup/
 config/spicetify/Extracted/
+config/spicetify/config-xpui.ini
 config/quickshell/dev-shortcuts.json
