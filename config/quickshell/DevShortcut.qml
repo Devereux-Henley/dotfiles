@@ -6,6 +6,7 @@ Item {
     id: root
 
     property string icon: ""
+    property string materialIcon: ""
     property string label: ""
     property string editor: ""
     property string shell: ""
@@ -25,6 +26,7 @@ Item {
     AppLauncher {
         anchors.fill: parent
         iconName: root.icon
+        materialIcon: root.materialIcon
         fallbackText: root.label
         onLaunch: root.openMenu()
     }

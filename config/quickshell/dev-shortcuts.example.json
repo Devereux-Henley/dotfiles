@@ -9,6 +9,7 @@
         {
             "label": "P",
             "icon": "/path/to/myproject-icon.png",
+            "materialIcon": "",
             "editor": "emacs ~/projects/myproject",
             "shell": "kitty -d ~/projects/myproject",
             "browser": "zen -P MyProj --new-instance --new-window http://localhost:3000",

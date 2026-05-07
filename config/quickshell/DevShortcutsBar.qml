@@ -34,6 +34,7 @@ Column {
         model: root.config.shortcuts
         delegate: DevShortcut {
             icon: modelData.icon || ""
+            materialIcon: modelData.materialIcon || ""
             label: modelData.label || ""
             editor: modelData.editor || ""
             shell: modelData.shell || ""

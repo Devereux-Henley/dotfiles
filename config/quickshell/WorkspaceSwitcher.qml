@@ -16,12 +16,30 @@ Item {
         onLaunch: root.openMenu()
     }
 
+    readonly property string iconBase: "/var/home/dhenley/Repos/dotfiles/apps/material-symbols/icons"
+
     function openMenu() {
         if (menu.running) return;
+        const rowsJq =
+            "sort_by(.id) | .[] | " +
+            "if (.id >= 1 and .id <= 9) then " +
+                "\"(\\(.windows) windows)\\u0000icon\\u001f\\($base)/filter_\\(.id).svg\" " +
+            "elif (.id >= 10) then " +
+                "\"\\(.id)  (\\(.windows) windows)\\u0000icon\\u001f\\($base)/filter_9_plus.svg\" " +
+            "elif (.name == \"special:music\") then " +
+                "\"(\\(.windows) windows)\\u0000icon\\u001f\\($base)/library_music.svg\" " +
+            "elif (.name == \"special:communication\") then " +
+                "\"(\\(.windows) windows)\\u0000icon\\u001f\\($base)/chat.svg\" " +
+            "else " +
+                "\"\\(.name)  (\\(.windows) windows)\" " +
+            "end";
         const script =
-            "choice=$(hyprctl workspaces -j | jq -r 'sort_by(.id) | .[] | \"\\(.name)  (\\(.windows) windows)\"' | rofi -dmenu -i -p 'Workspace'); " +
-            "[ -z \"$choice\" ] && exit 0; " +
-            "printf '%s\\n' \"${choice%  (*}\"";
+            "ws_json=$(mktemp); trap 'rm -f \"$ws_json\"' EXIT; " +
+            "hyprctl workspaces -j > \"$ws_json\"; " +
+            "names=$(jq -r 'sort_by(.id) | .[] | .name' \"$ws_json\"); " +
+            "idx=$(jq -r --arg base '" + root.iconBase + "' '" + rowsJq + "' \"$ws_json\" | rofi -dmenu -i -show-icons -format 'd' -p 'Workspace'); " +
+            "[ -z \"$idx\" ] && exit 0; " +
+            "printf '%s\\n' \"$names\" | sed -n \"${idx}p\"";
         menu.command = ["sh", "-c", script];
         menu.running = true;
     }
