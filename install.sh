@@ -57,6 +57,37 @@ if (( ${#material_fonts[@]} > 0 )); then
     fi
 fi
 
+# Material Symbols Rounded SVG icons (rofi rows + DevShortcut targets).
+# Names listed in apps/material-symbols/icons.list; each is fetched from
+# google/material-design-icons on first install and recolored with the
+# parchment fill so rofi renders them legibly against twilight.
+icons_dir="$REPO_DIR/apps/material-symbols/icons"
+icons_list="$REPO_DIR/apps/material-symbols/icons.list"
+icons_fill="#F5DEB3"
+if [[ -f "$icons_list" ]]; then
+    mkdir -p "$icons_dir"
+    while IFS= read -r name || [[ -n "$name" ]]; do
+        name="${name%%#*}"
+        name="${name##[[:space:]]}"
+        name="${name%%[[:space:]]}"
+        [[ -z "$name" ]] && continue
+        dest="$icons_dir/${name}.svg"
+        if [[ -f "$dest" ]]; then
+            echo "= icons/${name}.svg"
+            continue
+        fi
+        url="https://github.com/google/material-design-icons/raw/master/symbols/web/${name}/materialsymbolsrounded/${name}_24px.svg"
+        if curl -sL --fail -o "${dest}.tmp" "$url"; then
+            sed "s|<path |<path fill=\"${icons_fill}\" |" "${dest}.tmp" > "$dest"
+            rm -f "${dest}.tmp"
+            echo "+ icons/${name}.svg"
+        else
+            rm -f "${dest}.tmp"
+            echo "- icons/${name}.svg (download failed: $url)"
+        fi
+    done < "$icons_list"
+fi
+
 # Zen browser (user flatpak): profile dir name is non-deterministic, so glob it.
 # Requires toolkit.legacyUserProfileCustomizations.stylesheets=true in about:config.
 zen_chrome_src="$REPO_DIR/apps/zen/userChrome.css"
